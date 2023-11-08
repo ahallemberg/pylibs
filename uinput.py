@@ -8,10 +8,10 @@ class Init:
     """
     Klasse for å initalisere module
     """
-    commands: dict[str, ExitInputState|ExitProgram] = {}
+    commands: dict[str, Exception] = {}
 
     @staticmethod
-    def setCommands(commands: dict[str, ExitInputState|ExitProgram]) -> None:
+    def setCommands(commands: dict[str, Exception]) -> None:
         """
         Static method for å sette ulike kommandoer som raise gitt exception ved input
 
@@ -20,9 +20,9 @@ class Init:
         commands : dict[str, ExitInputState|ExitProgram]
             dict med key-value-pairs hvor key er hvilken input fra bruker som raiser gitt exception gitt som value
         """
-        newDict: dict[str, ExitInputState|ExitProgram] = {} # lager ny dict for commands
+        newDict: dict[str, Exception] = {} # lager ny dict for commands
         for cmd, exception in commands.items(): # looper gjennom key-value-pairs i dict
-            if not isinstance(exception, ExitInputState) and not isinstance(exception, ExitProgram): # sjekker om riktig exception er gitt
+            if not issubclass(exception, Exception): # sjekker om riktig exception er gitt
                 raise TypeError("Value i commands dict må være av typen Exception")
 
             if not isinstance(cmd, str): # sjekker om cmd er string
