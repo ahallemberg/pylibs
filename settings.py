@@ -1,5 +1,5 @@
 import json, os
-from library.uinput import Input 
+from pylibs.uinput import Input 
 
 
 class NotInitializedError(Exception):
